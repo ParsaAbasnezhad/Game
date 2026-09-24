@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Live Broadcasts — MAC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" href="../static/css/loader.css">
+</head>
+<body>
+
+<script src="../static/script/loader.js"></script>
+
+
+<div class="scanlines"></div>
+<div class="scan-sweep"></div>
+<div class="viewport-hud"></div>
+
+<header>
+    <div class="wrap">
+        <div style="display:flex; align-items:center;">
+            <a class="brand" href="index.html">
+                <div class="brand-mark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0a0c08" stroke-width="2"><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+                </div>
+                <span class="brand-name">MAC</span>
+            </a>
+                  <nav>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="live.html">Live</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+        </div>
+        <div class="header-actions">
+            <div class="rank-strip"><span class="blip"></span>3 Broadcasts Live</div>
+            <a class="btn btn-ghost" href="login.html">Sign In</a>
+            <button class="mobile-nav-toggle" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="tournaments.html">Tournaments</a>
+    <a href="live.html">Live</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <div class="mobile-nav-cta">
+      <a class="btn btn-ghost" href="login.html">Sign In</a>
+    </div>
+  </div>
+</div>
+
+<section class="page-hero noise-bg">
+    <div class="wrap">
+        <div class="breadcrumb"><a href="index.html">Home</a> / <span>Live Broadcasts</span></div>
+        <div class="live-badge" style="margin-bottom:16px;"><span class="dot"></span>Broadcasting Now</div>
+        <h1>Live tournament broadcasts</h1>
+        <p class="lede">Watch every match as it happens, follow the score in real time, and drop into chat with the crowd.</p>
+    </div>
+</section>
+
+<section class="section noise-bg">
+    <div class="wrap">
+        <div class="live-stage">
+
+            <div data-reveal>
+                <div class="video-frame">
+                    <div class="video-overlay-top">
+                        <span class="live-badge"><span class="dot"></span>Live</span>
+                        <span class="viewer-count">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              18,402 watching
+            </span>
+                    </div>
+                    <div class="play-core">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                    </div>
+                    <div class="video-overlay-bottom">
+                        <div class="score-strip">
+                            <span class="team">IGNIS</span>
+                            <span class="score">2</span>
+                            <span class="vs">:</span>
+                            <span class="score">1</span>
+                            <span class="team">STEEL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-meta">
+                    <div>
+                        <h2>Ignis Cup: Spring Clash — Grand Final</h2>
+                        <p>Map 4 of 5 · Vector Arena · Best of 5</p>
+                    </div>
+                    <span class="status-pill upcoming" style="background:rgba(76,175,80,.12); border-color:rgba(76,175,80,.4); color:var(--green);"><span class="dot" style="background:var(--green);"></span>Map Break — 4 Min</span>
+                </div>
+            </div>
+
+            <div class="chat-panel" data-reveal>
+                <div class="chat-head">
+                    <span>Live Chat</span>
+                    <span style="color:var(--text-mid); font-weight:600;">2.1k here</span>
+                </div>
+                <div class="chat-body" id="chatBody">
+                    <div class="chat-msg"><div class="cm-avatar"></div><div><span class="cm-name">Rook_7:</span><span class="cm-text">that entry frag was disgusting</span></div></div>
+                    <div class="chat-msg"><div class="cm-avatar"></div><div><span class="cm-name green">Cinder:</span><span class="cm-text">Ignis rotating to B, watch out</span></div></div>
+                    <div class="chat-msg"><div class="cm-avatar"></div><div><span class="cm-name">ByteMarshal:</span><span class="cm-text">map break already?? that went fast</span></div></div>
+                    <div class="chat-msg"><div class="cm-avatar"></div><div><span class="cm-name">Onyx_Ops:</span><span class="cm-text">STEEL needs to close this out</span></div></div>
+                </div>
+                <form class="chat-foot" id="chatForm">
+                    <input type="text" placeholder="Say something…" maxlength="140">
+                    <button type="submit" aria-label="Send message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section noise-bg">
+    <div class="wrap">
+        <div class="section-header split" data-reveal>
+            <h2 style="max-width:600px;">More broadcasts</h2>
+            <p>Every current, upcoming, and recently finished stream across the circuit.</p>
+        </div>
+
+        <div class="live-tabs" data-reveal>
+            <button class="live-tab active" data-status="all">All</button>
+            <button class="live-tab" data-status="live">Live Now</button>
+            <button class="live-tab" data-status="upcoming">Upcoming</button>
+            <button class="live-tab" data-status="replay">Replays</button>
+        </div>
+
+        <div class="stream-grid">
+            <div class="stream-card" data-status="live" data-reveal data-reveal-group="streams">
+                <div class="stream-thumb">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    <span class="badge-corner live-badge"><span class="dot"></span>Live</span>
+                    <span class="viewer-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>6,210</span>
+                </div>
+                <div class="stream-info">
+                    <h4>Steel Circuit Open — Semifinal</h4>
+                    <p>Rift Legion · Best of 3</p>
+                </div>
+            </div>
+
+            <div class="stream-card" data-status="live" data-reveal data-reveal-group="streams">
+                <div class="stream-thumb">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    <span class="badge-corner live-badge"><span class="dot"></span>Live</span>
+                    <span class="viewer-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,875</span>
+                </div>
+                <div class="stream-info">
+                    <h4>Ember Row Rapid Fire — Round 2</h4>
+                    <p>Skyforge Tactics · Single Elim</p>
+                </div>
+            </div>
+
+            <div class="stream-card" data-status="upcoming" data-reveal data-reveal-group="streams">
+                <div class="stream-thumb">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span class="badge-corner status-pill upcoming"><span class="dot"></span>18:00 UTC</span>
+                </div>
+                <div class="stream-info">
+                    <h4>Northline Invitational — Opening Ceremony</h4>
+                    <p>Vector Arena · Group Stage</p>
+                </div>
+            </div>
+
+            <div class="stream-card" data-status="upcoming" data-reveal data-reveal-group="streams">
+                <div class="stream-thumb">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span class="badge-corner status-pill upcoming"><span class="dot"></span>21:30 UTC</span>
+                </div>
+                <div class="stream-info">
+                    <h4>Midnight Protocol Series — Qualifiers</h4>
+                    <p>Rift Legion · Bo3</p>
+                </div>
+            </div>
+
+            <div class="stream-card" data-status="replay" data-reveal data-reveal-group="streams">
+                <div class="stream-thumb">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    <span class="badge-corner" style="background:rgba(152,164,178,.15); border:1px solid rgba(152,164,178,.35); color:var(--text-mid); padding:5px 10px; border-radius:4px; font-size:10px; font-weight:800; letter-spacing:1px; text-transform:uppercase;">Replay</span>
+                    <span class="viewer-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>41k views</span>
+                </div>
+                <div class="stream-info">
+                    <h4>Command Line Championship — Grand Final</h4>
+                    <p>Vector Arena · Full VOD</p>
+                </div>
+            </div>
+
+            <div class="stream-card" data-status="replay" data-reveal data-reveal-group="streams">
+                <div class="stream-thumb">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    <span class="badge-corner" style="background:rgba(152,164,178,.15); border:1px solid rgba(152,164,178,.35); color:var(--text-mid); padding:5px 10px; border-radius:4px; font-size:10px; font-weight:800; letter-spacing:1px; text-transform:uppercase;">Replay</span>
+                    <span class="viewer-count"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>17k views</span>
+                </div>
+                <div class="stream-info">
+                    <h4>Skyforge Winter Qualifier — Highlights</h4>
+                    <p>Skyforge Tactics · Best Plays</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section noise-bg">
+    <div class="wrap">
+        <div class="section-header" data-reveal>
+            <h2 style="max-width:600px;">Broadcast schedule</h2>
+            <p>Times shown in UTC — set a reminder before puck drop.</p>
+        </div>
+        <div class="schedule-list" data-reveal>
+            <div class="schedule-row">
+                <span class="schedule-time">18:00</span>
+                <div><h5>Northline Invitational — Opening Ceremony</h5><p>Vector Arena · Group Stage</p></div>
+            </div>
+            <div class="schedule-row">
+                <span class="schedule-time">20:15</span>
+                <div><h5>Ember Row Showdown — Quarterfinal</h5><p>Skyforge Tactics · Bo3</p></div>
+            </div>
+            <div class="schedule-row">
+                <span class="schedule-time">21:30</span>
+                <div><h5>Midnight Protocol Series — Qualifiers</h5><p>Rift Legion · Bo3</p></div>
+            </div>
+            <div class="schedule-row">
+                <span class="schedule-time">23:45</span>
+                <div><h5>Operator Ascension Series — Round of 16</h5><p>Vector Arena · Single Elim</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer-live">
+    <div class="wrap">
+        <div class="foot-top">
+            <div>
+                <div class="foot-brand">
+                    <div class="foot-mark">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+                    </div>
+                    <div>
+                        <div class="name">MAC</div>
+                        <div class="sub">Unit Insignia / Digital Command</div>
+                    </div>
+                </div>
+                <p class="foot-desc">We offer a comprehensive suite of digital marketing services that cover all aspects of your online presence. From SEO and social media marketing to content creation and PPC advertising, we have the expertise and resources to handle your diverse marketing needs.</p>
+                <div class="foot-social">
+                    <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+                    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4zM8.5 8h3.8v2.1h.06c.53-1 1.83-2.1 3.77-2.1 4.03 0 4.78 2.66 4.78 6.1V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.17 0-2.5 1.7-2.5 3.44V23h-4z"/></svg></a>
+                </div>
+            </div>
+
+            <div class="foot-cols">
+                <div class="foot-col">
+                    <h5>Navigation</h5>
+          <a href="tournaments.html">Tournaments</a>
+          <a href="live.html">Live</a>
+          <a href="leaderboard.html">Leaderboard</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+                <div class="foot-col">
+                    <h5>Licence</h5>
+                    <a href="terms.html">Terms &amp; Conditions</a>
+                    <a href="terms.html#privacy">Privacy Policy</a>
+                    <a href="#">Copyright</a>
+                </div>
+                <div class="foot-col" style="min-width:220px;">
+                    <h5>Contact</h5>
+                    <div class="foot-contact">
+                        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>(406) 555-0120</div>
+                        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>hey@boostim.com</div>
+                        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>2972 Westheimer Rd. Santa Ana, Illinois 85486</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="foot-bottom">
+            <p>© 2026 MAC Digital Command. Streams are illustrative placeholders — connect a real video provider before launch.</p>
+            <a class="btn btn-primary" href="tournaments.html">Browse Tournaments
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script src="../static/script/script.js"></script>
+</body>
+</html>
