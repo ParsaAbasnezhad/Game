@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0c08" />
+    <title>404 — Signal Lost | MAC Digital Command</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <link rel="stylesheet" href="./static/css/404.css">
+</head>
+<body class="error-page">
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="scan-sweep" aria-hidden="true"></div>
+    <div class="viewport-hud" aria-hidden="true"></div>
+
+    <header class="error-header">
+        <div class="wrap">
+            <a class="brand" href="./index.html" aria-label="MAC home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0a0c08" stroke-width="2">
+                        <circle cx="12" cy="12" r="8"/>
+                        <line x1="12" y1="2" x2="12" y2="6"/>
+                        <line x1="12" y1="18" x2="12" y2="22"/>
+                        <line x1="2" y1="12" x2="6" y2="12"/>
+                        <line x1="18" y1="12" x2="22" y2="12"/>
+                    </svg>
+                </span>
+                <span class="brand-name">MAC</span>
+            </a>
+            <div class="error-header-status"><span class="error-live-dot"></span>Command link unstable</div>
+        </div>
+    </header>
+
+    <main class="error-main noise-bg">
+        <div class="error-glow error-glow-orange" aria-hidden="true"></div>
+        <div class="error-glow error-glow-green" aria-hidden="true"></div>
+        <div class="error-grid" aria-hidden="true"></div>
+
+        <section class="error-content" aria-labelledby="error-title">
+            <div class="error-kicker"><span class="tag"><span class="dot"></span>System Alert / Sector 404</span></div>
+            <div class="error-visual" aria-hidden="true">
+                <div class="error-coordinates">X: 00.404&nbsp;&nbsp; / &nbsp;&nbsp;Y: --.---</div>
+                <div class="error-number glitch" data-text="404">404</div>
+                <div class="error-radar">
+                    <span class="radar-cross radar-cross-horizontal"></span>
+                    <span class="radar-cross radar-cross-vertical"></span>
+                    <span class="radar-ring radar-ring-outer"></span>
+                    <span class="radar-ring radar-ring-middle"></span>
+                    <span class="radar-ring radar-ring-inner"></span>
+                    <span class="radar-sweep"></span>
+                    <span class="radar-blip radar-blip-one"></span>
+                    <span class="radar-blip radar-blip-two"></span>
+                    <span class="radar-core"></span>
+                </div>
+                <div class="error-code">ERR // ROUTE NOT FOUND</div>
+                <span class="error-target" aria-hidden="true"></span>
+            </div>
+
+            <p class="error-eyebrow"><span></span>Lost in the battlefield?</p>
+            <h1 id="error-title">Signal lost.<br><span>Target not found.</span></h1>
+            <p class="error-description">The page you’re looking for has left the map, been moved, or never spawned here.</p>
+
+            <div class="error-actions">
+                <a class="btn btn-primary" href="./index.html">
+                    Return to base
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+                <a class="error-secondary-link" href="./index.html#resources">Open mission intel <span aria-hidden="true">↗</span></a>
+            </div>
+        </section>
+
+        <div class="error-footer" aria-label="System status">
+            <span><i></i>Operator status: safe</span>
+            <span>Reconnect to command</span>
+            <span>MAC // 2024</span>
+        </div>
+    </main>
+</body>
+</html>
