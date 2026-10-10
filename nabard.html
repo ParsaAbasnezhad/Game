@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <style>html{color-scheme:dark}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+  <title>نبرد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800;900&family=Inter:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap">
+  <style>
+    /* Layout: RTL esports portal. Dark single-theme, lime accent on ink surfaces. Hero art on the left, copy on the right. */
+    :root {
+      --bg: #0a0d10;
+      --surface: #11161b;
+      --card: #181e24;
+      --line: #293139;
+      --fg: #f3f5f4;
+      --muted: #9ba6ae;
+      --dim: #64717c;
+      --lime: #c3f768;
+      --lime-ink: #10170c;
+      --lime-wash: #202c18;
+      --lime-line: #40562b;
+      --font-fa: "Noto Sans Arabic", "Vazirmatn", Tahoma, sans-serif;
+      --font-en: "Rajdhani", "Inter", "Helvetica Neue", Arial, sans-serif;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--font-fa); font-size: 14px; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+    svg.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .en { font-family: var(--font-en); direction: ltr; unicode-bidi: isolate; }
+    .wrap { padding-inline: clamp(16px, 5.5vw, 80px); }
+
+    /* default artwork: generated, no downloads */
+    .art { --h: 95; position: relative; overflow: hidden; background:
+            radial-gradient(circle at 72% 28%, hsl(var(--h) 75% 48% / .75), transparent 52%),
+            radial-gradient(circle at 20% 90%, hsl(calc(var(--h) + 60) 60% 40% / .45), transparent 55%),
+            linear-gradient(160deg, hsl(var(--h) 40% 17%), hsl(calc(var(--h) + 40) 35% 7%)); }
+    .art::before { content: ""; position: absolute; inset: 0; opacity: .5; background-image:
+            linear-gradient(hsl(var(--h) 40% 60% / .08) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--h) 40% 60% / .08) 1px, transparent 1px); background-size: 28px 28px; }
+    .art::after { content: ""; position: absolute; width: 46%; aspect-ratio: 1; max-width: 220px; inset-inline-end: 12%; top: 50%; transform: translateY(-50%); opacity: .55;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='.6'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cline x1='12' y1='1' x2='12' y2='6'/%3E%3Cline x1='12' y1='18' x2='12' y2='23'/%3E%3Cline x1='1' y1='12' x2='6' y2='12'/%3E%3Cline x1='18' y1='12' x2='23' y2='12'/%3E%3C/svg%3E") center/contain no-repeat; }
+    .art.sm::after { width: 38%; inset-inline-end: 8%; }
+
+    /* shared pieces */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 48px; padding-inline: 20px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); font-weight: 700; font-size: 14px; white-space: nowrap; transition: transform .15s, border-color .15s; }
+    .btn:hover { transform: translateY(-1px); border-color: var(--dim); }
+    .btn.pri { background: var(--lime); border-color: var(--lime); color: var(--lime-ink); }
+    .btn.pri:hover { border-color: #fff; }
+    .tag { display: inline-block; background: var(--card); color: var(--muted); font-size: 11px; font-weight: 600; line-height: 1.9; padding: 3px 10px; border-radius: 6px; white-space: nowrap; }
+    .tag.on { background: var(--lime-wash); color: var(--lime); }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 3px #c3f76833; flex: none; }
+    .eyebrow { font-family: var(--font-en); direction: ltr; font-size: 11px; font-weight: 600; color: var(--dim); letter-spacing: .08em; text-align: right; }
+
+    /* nav */
+    .nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px 24px; min-height: 92px; padding-block: 14px; background: var(--bg); }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand .mark { width: 40px; height: 44px; border-radius: 6px; background: var(--lime); color: var(--lime-ink); display: grid; place-items: center; }
+    .brand .mark svg { width: 26px; height: 26px; }
+    .brand b { display: block; font-weight: 900; font-size: 30px; line-height: 1.3; }
+    .brand small { display: block; font-family: var(--font-en); font-size: 9px; color: var(--muted); text-align: right; letter-spacing: .04em; }
+    .links { display: flex; gap: 32px; align-items: center; }
+    .links a { font-weight: 500; font-size: 14px; color: var(--muted); padding-block: 6px; position: relative; transition: color .15s; }
+    .links a:hover { color: var(--fg); }
+    .links a.on { color: var(--lime); font-weight: 700; }
+    .links a.on::after { content: ""; position: absolute; inset-inline: 0; margin-inline: auto; bottom: -4px; width: 18px; height: 2px; background: var(--lime); }
+    .acct { display: flex; align-items: center; gap: 20px; }
+    .iconbtn { background: none; border: 0; color: var(--muted); display: grid; place-items: center; padding: 4px; }
+    .iconbtn:hover { color: var(--fg); }
+
+    /* hero */
+    .hero { position: relative; min-height: 654px; display: flex; flex-direction: column; justify-content: space-between; padding-block: 56px 32px; overflow: hidden; isolation: isolate; }
+    .hero > .art { position: absolute; inset: 0; z-index: -2; --h: 95; transition: filter .4s; }
+    .hero > .art::after { width: min(46vw, 560px); max-width: none; inset-inline-end: auto; inset-inline-start: 12%; opacity: .35; }
+    .hero .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(10,13,16,.08) 0%, rgba(10,13,16,.31) 40%, rgba(10,13,16,.91) 66%, #0a0d10 100%); }
+    .hero-copy { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; width: min(590px, 100%); }
+    .cat { display: flex; align-items: center; gap: 12px; }
+    .cat .en { font-size: 11px; font-weight: 600; color: var(--muted); }
+    .hero h1 { margin: 0; font-weight: 900; font-size: clamp(34px, 5vw, 58px); line-height: 1.45; text-wrap: balance; }
+    .hero p.lead { margin: 0; font-size: 16px; line-height: 2; color: var(--muted); max-width: 54ch; }
+    .hero .acts { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 10px; }
+    .proof { display: flex; align-items: center; gap: 10px; padding-top: 8px; font-size: 12px; color: var(--muted); }
+    .pager { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 48px; }
+    .pager .ctl { display: flex; align-items: center; gap: 12px; direction: ltr; }
+    .pager .ctl .en { font-size: 12px; }
+    .pager button.bar { border: 0; padding: 0; height: 3px; width: 24px; background: var(--dim); border-radius: 2px; transition: width .25s, background .25s; }
+    .pager button.bar.on { width: 54px; background: var(--lime); }
+    .pager .gname { font-family: var(--font-en); font-weight: 700; font-size: 13px; color: var(--muted); direction: ltr; }
+
+    /* live strip */
+    .live { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; min-height: 72px; padding-block: 14px; background: var(--surface); border-block: 1px solid var(--line); }
+    .live > * { display: flex; align-items: center; gap: 8px; }
+    .live .a { font-size: 12px; color: var(--muted); }
+    .live .b { font-size: 13px; }
+    .live .c { font-size: 11px; color: var(--muted); }
+    .live .d { font-size: 13px; font-weight: 700; color: var(--lime); gap: 10px; }
+
+    /* sections */
+    .sec { padding-block: 64px; }
+    .sh { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
+    .sh h2 { margin: 0; font-weight: 800; font-size: 30px; line-height: 1.6; text-wrap: balance; }
+    .more { display: inline-flex; align-items: center; gap: 8px; color: var(--lime); font-weight: 600; font-size: 13px; padding-bottom: 8px; }
+    .more:hover { text-decoration: underline; }
+
+    .games { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+    .game { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; transition: transform .2s, border-color .2s; display: block; }
+    .game:hover { transform: translateY(-4px); border-color: var(--lime); }
+    .game.hot { border-color: var(--lime); }
+    .game .art { height: 258px; }
+    .game .info { padding: 18px; display: flex; flex-direction: column; gap: 9px; }
+    .game .nm { font-family: var(--font-en); direction: ltr; text-align: right; font-weight: 800; font-size: 16px; }
+    .game .meta { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: var(--muted); }
+    .game.hot .meta span:last-child { color: var(--lime); }
+
+    /* news */
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+    .chip { background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 600; padding: 5px 18px; border-radius: 6px; }
+    .chip[aria-pressed="true"] { background: var(--lime-wash); border-color: var(--lime); color: var(--lime); }
+    .editorial { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 624px); gap: 32px; align-items: start; }
+    .story { display: flex; gap: 20px; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .story .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+    .story .g { font-family: var(--font-en); direction: ltr; text-align: right; font-weight: 700; font-size: 10px; color: var(--lime); }
+    .story h3 { margin: 0; font-weight: 700; font-size: 17px; line-height: 1.7; }
+    .story h3 a:hover { color: var(--lime); }
+    .story time, .story .mt { font-size: 11px; color: var(--muted); line-height: 1.8; }
+    .story .art { width: 156px; height: 110px; border-radius: 6px; flex: none; }
+    .cover { position: relative; min-height: 416px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 24px; isolation: isolate; }
+    .cover > .art { position: absolute; inset: 0; z-index: -2; }
+    .cover::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,13,16,0), rgba(10,13,16,.13) 50%, rgba(10,13,16,.96)); }
+    .cover > * { align-self: flex-start; }
+    .cover h3 { margin: 0; font-weight: 800; font-size: 25px; line-height: 1.7; text-wrap: balance; }
+    .cover p { margin: 0; font-size: 13px; line-height: 1.8; color: var(--muted); }
+    .cover .mt { font-size: 11px; color: var(--muted); }
+
+    /* academy */
+    .academy { background: var(--surface); border-block: 1px solid var(--line); }
+    .academy .in { display: grid; grid-template-columns: 278px minmax(0, 1fr); gap: 30px; align-items: center; }
+    .intro { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+    .intro h2 { margin: 0; font-weight: 800; font-size: 32px; line-height: 1.6; }
+    .intro p { margin: 0; font-size: 14px; line-height: 2; color: var(--muted); }
+    .intro small { font-size: 11px; line-height: 1.8; color: var(--dim); }
+    .guides { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .guide { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: transform .2s; }
+    .guide:hover { transform: translateY(-3px); }
+    .guide .art { height: 186px; }
+    .guide .time { position: absolute; top: 12px; inset-inline-start: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; background: rgba(10,13,16,.85); padding: 4px 8px; border-radius: 6px; font-size: 10px; }
+    .guide .time svg { width: 14px; height: 14px; }
+    .guide .bd { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .guide .g { font-family: var(--font-en); direction: ltr; text-align: right; font-weight: 600; font-size: 10px; color: var(--lime); }
+    .guide h3 { margin: 0; font-weight: 700; font-size: 17px; line-height: 1.7; }
+    .guide .ft { display: flex; justify-content: space-between; align-items: center; margin-top: auto; font-size: 11px; color: var(--muted); }
+
+    /* tournaments */
+    .arena { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 624px); gap: 28px; align-items: start; }
+    .events { display: flex; flex-direction: column; gap: 20px; }
+    .event { display: flex; gap: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
+    .event .bd { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 9px; }
+    .event .top, .event .bot { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .event .top .en { font-size: 10px; color: var(--muted); }
+    .event h3 { margin: 0; font-weight: 700; font-size: 20px; line-height: 1.8; }
+    .event .when { font-size: 12px; color: var(--muted); line-height: 1.8; }
+    .event .bot a { color: var(--lime); font-size: 12px; }
+    .event .bot a:hover { text-decoration: underline; }
+    .event .bot b { font-size: 13px; }
+    .emblem { width: 74px; height: 90px; border-radius: 6px; background: var(--card); display: grid; place-items: center; flex: none; color: var(--lime); }
+    .emblem svg { width: 32px; height: 32px; }
+    .cup { min-height: 402px; }
+    .cup h3 { font-weight: 900; font-size: 30px; line-height: 1.5; }
+    .cup .prize { font-weight: 700; font-size: 23px; line-height: 1.8; color: var(--lime); }
+    .cup .game-l { font-family: var(--font-en); font-weight: 700; font-size: 11px; color: var(--muted); direction: ltr; }
+    .reg { align-self: stretch !important; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 10px; }
+    .cap { width: min(220px, 100%); font-size: 11px; color: var(--muted); }
+    .cap .bar { height: 4px; background: var(--line); margin-top: 8px; border-radius: 2px; overflow: hidden; }
+    .cap .bar i { display: block; height: 100%; width: 75%; background: var(--lime); }
+
+    /* videos */
+    .watch { background: var(--surface); border-block: 1px solid var(--line); }
+    .videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .video { display: flex; flex-direction: column; gap: 16px; }
+    .thumb { position: relative; height: 228px; border-radius: 10px; overflow: hidden; }
+    .thumb .art { position: absolute; inset: 0; }
+    .thumb .play { position: absolute; inset: 0; margin: auto; width: 52px; height: 52px; border-radius: 50%; background: rgba(16,22,27,.8); border: 1px solid rgba(255,255,255,.4); display: grid; place-items: center; z-index: 2; transition: transform .2s, background .2s; }
+    .thumb .play svg { width: 22px; height: 22px; fill: #fff; stroke: none; }
+    .video:hover .play { transform: scale(1.1); background: var(--lime); }
+    .video:hover .play svg { fill: var(--lime-ink); }
+    .thumb .dur { position: absolute; bottom: 12px; inset-inline-start: 12px; z-index: 2; font-family: var(--font-en); font-weight: 600; font-size: 11px; background: rgba(10,13,16,.9); padding: 4px 8px; border-radius: 6px; direction: ltr; }
+    .thumb .vc { position: absolute; top: 12px; inset-inline-end: 12px; z-index: 2; font-size: 10px; color: var(--lime); background: rgba(10,13,16,.85); padding: 3px 10px; border-radius: 6px; }
+    .video h3 { margin: 0; font-weight: 700; font-size: 18px; line-height: 1.8; }
+    .video .vm { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+
+    /* community */
+    .comm { display: grid; grid-template-columns: minmax(0, 624px) minmax(0, 1fr); gap: 70px; align-items: center; }
+    .invite { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+    .invite h2 { margin: 0; font-weight: 800; font-size: 32px; line-height: 1.6; }
+    .invite p { margin: 0; font-size: 14px; line-height: 2; color: var(--muted); max-width: 52ch; }
+    .nums { display: flex; flex-wrap: wrap; gap: 14px 32px; padding-block: 6px; }
+    .nums b { display: block; font-family: var(--font-en); font-weight: 700; font-size: 24px; line-height: 1.2; }
+    .nums span { font-size: 10px; color: var(--muted); }
+    .board { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
+    .board .hd { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding-bottom: 6px; }
+    .board .hd .en { font-size: 10px; color: var(--dim); }
+    .board .hd b { font-size: 16px; }
+    .thread { display: flex; align-items: center; gap: 16px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+    .thread .tx { flex: 1; min-width: 0; }
+    .thread .tx b { display: block; font-weight: 600; font-size: 14px; line-height: 1.8; }
+    .thread .tx span { font-size: 10px; color: var(--muted); }
+    .av { position: relative; width: 42px; height: 42px; border-radius: 6px; background: var(--card); display: grid; place-items: center; font-family: var(--font-en); font-weight: 700; font-size: 16px; color: var(--lime); flex: none; }
+    .av i { position: absolute; bottom: -2px; inset-inline-start: -2px; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); }
+    .board > a { display: block; padding-top: 14px; font-size: 12px; color: var(--lime); }
+    .board > a:hover { text-decoration: underline; }
+
+    /* newsletter */
+    .news { padding-bottom: 64px; }
+    .panel { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 60px; background: var(--lime-wash); border: 1px solid var(--lime-line); border-radius: 10px; padding: 30px 40px; }
+    .panel .msg { flex: 1 1 320px; min-width: 0; }
+    .panel h2 { margin: 0 0 6px; font-weight: 800; font-size: 25px; line-height: 1.8; }
+    .panel .msg p { margin: 0; font-size: 13px; line-height: 1.8; color: var(--muted); }
+    .panel form { flex: 1 1 360px; max-width: 540px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+    .panel .row { display: flex; gap: 10px; }
+    .field { flex: 1; min-width: 0; height: 48px; display: flex; align-items: center; gap: 10px; padding-inline: 16px; background: var(--bg); border: 1px solid var(--lime-line); border-radius: 6px; color: var(--muted); }
+    .field svg { width: 18px; height: 18px; }
+    .field input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--fg); font: inherit; font-size: 12px; }
+    .field:focus-within { border-color: var(--lime); }
+    .field input::placeholder { color: var(--muted); }
+    .panel small { font-size: 10px; line-height: 1.8; color: var(--muted); }
+    .panel small.ok { color: var(--lime); font-size: 12px; }
+
+    /* footer */
+    footer { background: var(--surface); border-top: 1px solid var(--line); padding-block: 44px 26px; }
+    .fcols { display: grid; grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr)); gap: 32px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+    .fcols h4 { margin: 0 0 12px; font-weight: 700; font-size: 14px; }
+    .fcols ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .fcols li a { font-size: 12px; color: var(--muted); }
+    .fcols li a:hover { color: var(--lime); }
+    .fbrand p { margin: 14px 0; font-size: 12px; line-height: 1.8; color: var(--muted); max-width: 40ch; }
+    .fbrand .brand b { font-size: 31px; }
+    .fbrand .brand span.t { font-size: 11px; color: var(--muted); }
+    .social { display: flex; gap: 10px; }
+    .social a { width: 34px; height: 34px; border-radius: 6px; background: var(--card); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); }
+    .social a:hover { color: var(--lime); border-color: var(--lime); }
+    .social svg { width: 17px; height: 17px; }
+    .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-top: 24px; font-size: 11px; color: var(--muted); }
+    .legal .en { font-size: 10px; color: var(--dim); }
+
+    /* gaming layer: HUD brackets, cut corners, neon glow, scanlines, motion */
+    :root { --br: linear-gradient(var(--lime), var(--lime)); }
+    .en { letter-spacing: .05em; }
+    .eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-inline-start: 10px; background: var(--lime); transform: rotate(45deg); box-shadow: 0 0 8px var(--lime); }
+    .story .g, .guide .g, .event .top .en { font-size: 12px; letter-spacing: .1em; }
+    .game .nm { font-size: 19px; letter-spacing: .04em; text-transform: uppercase; }
+    .brand small { font-size: 11px; letter-spacing: .18em; }
+
+    .nav { position: relative; border-bottom: 1px solid var(--line); }
+    .nav::after { content: ""; position: absolute; inset-inline: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, var(--lime), transparent); opacity: .55; }
+    .links a.on::after { box-shadow: 0 0 10px var(--lime); }
+    .brand .mark { clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); box-shadow: 0 0 24px rgba(195,247,104,.35); }
+
+    .btn { --cut: 10px; position: relative; overflow: hidden; border-radius: 0; clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut)); }
+    .btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%); transform: translateX(-130%); transition: transform .6s; pointer-events: none; }
+    .btn:hover::after { transform: translateX(130%); }
+    .btn.pri { box-shadow: inset 0 -3px 0 rgba(0,0,0,.25); }
+    .hero .acts { filter: drop-shadow(0 0 14px rgba(195,247,104,.28)); }
+    .tag { border-radius: 0; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); padding-inline: 12px; }
+    .chip { border-radius: 0; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); }
+    .chip:hover { color: var(--fg); }
+
+    .dot { animation: ping 1.8s ease-out infinite; }
+    @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(195,247,104,.65); } 100% { box-shadow: 0 0 0 9px rgba(195,247,104,0); } }
+
+    .art::before { animation: drift 24s linear infinite; }
+    .art::after { animation: spin 70s linear infinite; }
+    @keyframes drift { to { background-position: 28px 28px, 28px 28px; } }
+    @keyframes spin { from { transform: translateY(-50%) rotate(0); } to { transform: translateY(-50%) rotate(360deg); } }
+
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 1px, transparent 1px 3px); opacity: .55; }
+    .hero::after, .game::after, .event::after, .cover::after { content: ""; position: absolute; pointer-events: none; z-index: 3;
+      background: var(--br) 0 0/16px 2px no-repeat, var(--br) 0 0/2px 16px no-repeat, var(--br) 100% 0/16px 2px no-repeat, var(--br) 100% 0/2px 16px no-repeat,
+      var(--br) 0 100%/16px 2px no-repeat, var(--br) 0 100%/2px 16px no-repeat, var(--br) 100% 100%/16px 2px no-repeat, var(--br) 100% 100%/2px 16px no-repeat; }
+    .hero::after { inset: 18px; z-index: 0; opacity: .55; background-size: 28px 2px, 2px 28px, 28px 2px, 2px 28px, 28px 2px, 2px 28px, 28px 2px, 2px 28px; }
+    .hero-copy, .pager { position: relative; z-index: 1; }
+    .game, .event, .cover { position: relative; }
+    .game::after, .event::after { inset: 6px; opacity: 0; transition: opacity .2s; }
+    .game:hover::after, .event:hover::after { opacity: 1; }
+    .cover::after { inset: 8px; opacity: .85; }
+    .game:hover { box-shadow: 0 0 0 1px var(--lime), 0 14px 40px -12px rgba(195,247,104,.4); }
+    .event { transition: border-color .2s, box-shadow .2s; }
+    .event:hover { border-color: var(--lime); box-shadow: 0 10px 34px -14px rgba(195,247,104,.4); }
+
+    .hero h1 { text-shadow: 0 0 40px rgba(195,247,104,.18), 3px 3px 0 rgba(0,0,0,.35); }
+    .hero h1.gl { animation: glitch .55s steps(2, end) 1; }
+    @keyframes glitch {
+      0% { transform: translate(3px, 0); text-shadow: 4px 0 rgba(195,247,104,.85), -4px 0 rgba(0,212,255,.7); }
+      20% { transform: translate(-3px, 1px); }
+      40% { transform: translate(2px, -1px); text-shadow: -3px 0 rgba(195,247,104,.8), 3px 0 rgba(0,212,255,.6); }
+      60% { transform: translate(-1px, 0); }
+    }
+
+    .live { background: linear-gradient(90deg, rgba(195,247,104,.07), transparent 30%, transparent 70%, rgba(195,247,104,.07)), var(--surface); }
+    .sec, .news { background-image: radial-gradient(circle at 1px 1px, rgba(155,166,174,.09) 1px, transparent 0); background-size: 24px 24px; }
+
+    .nums b { font-size: 30px; text-shadow: 0 0 18px rgba(195,247,104,.4); }
+    .cup .prize { text-shadow: 0 0 24px rgba(195,247,104,.45); }
+    .cap .bar { overflow: visible; }
+    .cap .bar i { background: repeating-linear-gradient(-45deg, #c3f768 0 8px, #9ed640 8px 16px); background-size: 22.6px 22.6px; animation: stripes 1s linear infinite; box-shadow: 0 0 10px rgba(195,247,104,.6); }
+    @keyframes stripes { to { background-position: 22.6px 0; } }
+    .thumb .play::before { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(195,247,104,.55); animation: ring 2s ease-out infinite; }
+    @keyframes ring { from { transform: scale(.9); opacity: 1; } to { transform: scale(1.55); opacity: 0; } }
+    .panel { position: relative; overflow: hidden; }
+    .panel::before { content: ""; position: absolute; inset-block: 0; inset-inline-start: 0; width: 10px; background: repeating-linear-gradient(-45deg, var(--lime) 0 6px, transparent 6px 12px); opacity: .85; }
+    .guide:hover, .video:hover .thumb { box-shadow: 0 12px 34px -14px rgba(195,247,104,.35); }
+
+    @media (max-width: 720px) { .hero::after { inset: 10px; } }
+    @media (prefers-reduced-motion: reduce) { .art::before, .art::after, .dot, .cap .bar i, .thumb .play::before, .hero h1.gl { animation: none !important; } .art::after { transform: translateY(-50%); } }
+
+    /* responsive */
+    @media (max-width: 1100px) {
+      .games { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .editorial, .arena, .comm { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+      .academy .in { grid-template-columns: minmax(0, 1fr); }
+      .guides { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .videos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fcols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .nav .links { order: 3; width: 100%; overflow-x: auto; gap: 24px; padding-bottom: 6px; }
+      .hero .shade { background: linear-gradient(180deg, rgba(10,13,16,.55), rgba(10,13,16,.92)); }
+      .hero { min-height: 0; }
+      .games, .guides, .videos { grid-template-columns: minmax(0, 1fr); }
+      .games { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .game .art { height: 190px; }
+      .story { flex-direction: column-reverse; }
+      .story .art { width: 100%; height: 160px; }
+      .event { flex-direction: column-reverse; }
+      .emblem { width: 100%; height: 60px; }
+      .panel { padding: 24px 20px; }
+      .sh h2, .intro h2, .invite h2 { font-size: 24px; }
+      .fcols { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></symbol>
+    <symbol id="play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="radio" viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></symbol>
+    <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16.5 12"/></symbol>
+    <symbol id="users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+    <symbol id="mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="swords" viewBox="0 0 24 24"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" x2="9" y1="14" y2="18"/><line x1="7" x2="4" y1="17" y2="20"/><line x1="3" x2="5" y1="19" y2="21"/></symbol>
+    <symbol id="youtube" viewBox="0 0 24 24"><path d="M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+    <symbol id="instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"/></symbol>
+    <symbol id="send" viewBox="0 0 24 24"><path d="M14.5 21.7a.5.5 0 0 0 .9-.1L22 2.5a.5.5 0 0 0-.7-.6L2.4 8.5a.5.5 0 0 0-.1.9l7.6 3.2a2 2 0 0 1 1.5 1.5z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+  </defs>
+</svg>
+
+<div dir="rtl" lang="fa">
+
+  <header class="wrap nav">
+    <a class="brand" href="#top" aria-label="نبرد">
+      <span class="mark"><svg class="i"><use href="#crosshair"/></svg></span>
+      <span><b>نبرد</b><small>NABARD.GG</small></span>
+    </a>
+    <nav class="links" aria-label="منوی اصلی">
+      <a class="on" href="#top">خانه</a>
+      <a href="#games">بازی‌ها</a>
+      <a href="#news">اخبار</a>
+      <a href="#academy">آموزش‌ها</a>
+      <a href="#arena">تورنمنت‌ها</a>
+      <a href="#community">کامیونیتی</a>
+    </nav>
+    <div class="acct">
+      <button class="iconbtn" aria-label="جستجو"><svg class="i"><use href="#search"/></svg></button>
+      <button class="btn"><svg class="i"><use href="#user"/></svg>ورود / عضویت</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-label="خبر ویژه">
+      <div class="art" id="heroArt"></div>
+      <div class="shade"></div>
+      <div class="hero-copy">
+        <div class="cat"><span class="tag on" id="heroTag">در کانون نبرد</span><span class="en" id="heroSeason">WARZONE / SEASON 06</span></div>
+        <h1 id="heroTitle">اینجا بازی نمی‌کنی؛<br>وارد نبرد می‌شی.</h1>
+        <p class="lead" id="heroLead">از اولین دراپ تا آخرین کیل؛ تازه‌ترین خبرها، راهنمای حرفه‌ای‌ها و هم‌تیمی بعدی‌ات را اینجا پیدا کن.</p>
+        <div class="acts">
+          <a class="btn pri" href="#games"><svg class="i"><use href="#arrow"/></svg>وارد دنیای نبرد شو</a>
+          <a class="btn" href="#watch"><svg class="i"><use href="#play"/></svg>تماشای تریلر</a>
+        </div>
+        <div class="proof"><span class="dot"></span>بیش از ۲۴ هزار گیمر؛ یک خانه</div>
+      </div>
+      <div class="pager">
+        <div class="ctl"><span class="en" id="heroNum">01 / 03</span><button class="bar on" aria-label="اسلاید ۱"></button><button class="bar" aria-label="اسلاید ۲"></button><button class="bar" aria-label="اسلاید ۳"></button></div>
+        <span class="gname" id="heroGame">CALL OF DUTY® WARZONE</span>
+      </div>
+    </section>
+
+    <div class="wrap live">
+      <div class="d"><svg class="i"><use href="#radio"/></svg>روی رادار</div>
+      <div class="c">امروز، ۱۰:۳۰</div>
+      <div class="b">ثبت‌نام کاپ پاییزی پابجی شروع شد؛ اسکوادت را آماده کن!</div>
+      <div class="a"><span class="dot"></span>۱٬۲۸۴ گیمر آنلاین</div>
+    </div>
+
+    <section class="wrap sec" id="games">
+      <div class="sh">
+        <div><div class="eyebrow">01 / GAME UNIVERSE</div><h2>میدان نبردت را انتخاب کن</h2></div>
+        <a class="more" href="#games">همهٔ بازی‌ها<svg class="i"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="games">
+        <a class="game" href="#games"><div class="art" style="--h:150"></div><div class="info"><div class="nm">EA SPORTS FC 26</div><div class="meta"><span>ورزشی</span><span>۱٫۸ هزار گیمر</span></div></div></a>
+        <a class="game" href="#games"><div class="art" style="--h:270"></div><div class="info"><div class="nm">FORTNITE</div><div class="meta"><span>بتل رویال</span><span>۳٫۲ هزار گیمر</span></div></div></a>
+        <a class="game" href="#games"><div class="art" style="--h:5"></div><div class="info"><div class="nm">VALORANT</div><div class="meta"><span>شوتر تاکتیکی</span><span>۴٫۵ هزار گیمر</span></div></div></a>
+        <a class="game" href="#games"><div class="art" style="--h:40"></div><div class="info"><div class="nm">PUBG MOBILE</div><div class="meta"><span>بتل رویال</span><span>۶٫۴ هزار گیمر</span></div></div></a>
+        <a class="game hot" href="#games"><div class="art" style="--h:95"></div><div class="info"><div class="nm">CALL OF DUTY</div><div class="meta"><span>شوتر اول‌شخص</span><span>۸٫۱ هزار گیمر</span></div></div></a>
+      </div>
+    </section>
+
+    <section class="wrap" id="news" style="padding-block: 8px 68px">
+      <div class="sh">
+        <div><div class="eyebrow">02 / INTEL ROOM</div><h2>تازه از خط مقدم</h2></div>
+        <a class="more" href="#news">تمام خبرها<svg class="i"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="filters" role="group" aria-label="فیلتر خبرها">
+        <button class="chip" aria-pressed="true" data-f="all">همه</button>
+        <button class="chip" aria-pressed="false" data-f="game">اخبار بازی</button>
+        <button class="chip" aria-pressed="false" data-f="update">آپدیت‌ها</button>
+        <button class="chip" aria-pressed="false" data-f="review">نقد و بررسی</button>
+      </div>
+      <div class="editorial">
+        <div id="stories">
+          <article class="story" data-c="update"><div class="txt"><span class="g">PUBG MOBILE</span><h3><a href="#news">آپدیت جدید پابجی؛ ارانگل دوباره غافلگیرت می‌کند</a></h3><span class="mt">۲ ساعت پیش &nbsp;•&nbsp; ۴ دقیقه مطالعه</span></div><div class="art sm" style="--h:40"></div></article>
+          <article class="story" data-c="update"><div class="txt"><span class="g">VALORANT</span><h3><a href="#news">تغییرات ایجنت‌ها در پچ جدید ولورانت؛ چه کسی قوی‌تر شد؟</a></h3><span class="mt">۴ ساعت پیش &nbsp;•&nbsp; ۳ دقیقه مطالعه</span></div><div class="art sm" style="--h:5"></div></article>
+          <article class="story" data-c="review"><div class="txt"><span class="g">EA SPORTS FC</span><h3><a href="#news">FC 26 زیر ذره‌بین؛ بازگشت هیجان به زمین</a></h3><span class="mt">۶ ساعت پیش &nbsp;•&nbsp; ۶ دقیقه مطالعه</span></div><div class="art sm" style="--h:150"></div></article>
+        </div>
+        <article class="cover">
+          <div class="art" style="--h:95"></div>
+          <span class="tag on">خبر ویژه</span>
+          <h3>فصل جدید وارزون از راه رسید؛<br>همه‌چیز برای یک شروع انفجاری</h3>
+          <p>نقشه‌های تازه، سلاح‌های جدید و تغییراتی که متای بازی را عوض می‌کنند.</p>
+          <span class="mt">تحریریه نبرد &nbsp;•&nbsp; ۱ ساعت پیش &nbsp;•&nbsp; ۵ دقیقه مطالعه</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="academy" id="academy">
+      <div class="wrap" style="padding-block:56px">
+        <div class="in">
+          <div class="intro">
+            <div class="eyebrow" style="align-self:stretch">03 / LEVEL UP</div>
+            <h2>شانسی نبر؛<br>حرفه‌ای بازی کن.</h2>
+            <p>ترفندهای امتحان‌شده، تنظیمات دقیق و راهنماهایی که واقعاً بازی‌ات را یک لول بالاتر می‌برند.</p>
+            <a class="btn" href="#academy"><svg class="i"><use href="#arrow"/></svg>ورود به آکادمی</a>
+            <small>بیش از ۱۲۰ راهنمای رایگان</small>
+          </div>
+          <div class="guides">
+            <a class="guide" href="#academy"><div class="art" style="--h:5"><span class="time">۸ دقیقه<svg class="i"><use href="#clock"/></svg></span></div><div class="bd"><span class="g">VALORANT</span><h3>کراس‌هیر بهتر، هدشات بیشتر</h3><div class="ft"><span class="tag">مبتدی</span><span>خواندن راهنما ←</span></div></div></a>
+            <a class="guide" href="#academy"><div class="art" style="--h:40"><span class="time">۱۲ دقیقه<svg class="i"><use href="#clock"/></svg></span></div><div class="bd"><span class="g">PUBG MOBILE</span><h3>از دراپ تا چیکن‌دینر؛ هوشمندانه بچرخ</h3><div class="ft"><span class="tag">متوسط</span><span>خواندن راهنما ←</span></div></div></a>
+            <a class="guide" href="#academy"><div class="art" style="--h:95"><span class="time">۱۰ دقیقه<svg class="i"><use href="#clock"/></svg></span></div><div class="bd"><span class="g">WARZONE</span><h3>بهترین لوداوت‌های این فصل وارزون</h3><div class="ft"><span class="tag">پیشرفته</span><span>خواندن راهنما ←</span></div></div></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap sec" id="arena">
+      <div class="sh">
+        <div><div class="eyebrow">04 / COMPETITIVE ARENA</div><h2>وقتشه اسکوادت رو به چالش بکشی</h2></div>
+        <a class="more" href="#arena">تقویم تورنمنت‌ها<svg class="i"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="arena">
+        <div class="events">
+          <article class="event"><div class="bd"><div class="top"><span class="tag on">ثبت‌نام باز</span><span class="en">WARZONE • DUO</span></div><h3>کاپ دوئل وارزون</h3><div class="when">جمعه ۲۴ مهر، ساعت ۲۰</div><div class="bot"><a href="#arena">جزئیات ←</a><b>۲۰ میلیون تومان</b></div></div><div class="emblem"><svg class="i"><use href="#crosshair"/></svg></div></article>
+          <article class="event"><div class="bd"><div class="top"><span class="tag">به‌زودی</span><span class="en">VALORANT • 5V5</span></div><h3>لیگ چلنجر ولورانت</h3><div class="when">پنج‌شنبه ۳۰ مهر، ساعت ۱۸</div><div class="bot"><a href="#arena">جزئیات ←</a><b>۳۰ میلیون تومان</b></div></div><div class="emblem"><svg class="i"><use href="#swords"/></svg></div></article>
+        </div>
+        <article class="cover cup">
+          <div class="art" style="--h:40"></div>
+          <span class="tag on">ثبت‌نام باز • ظرفیت محدود</span>
+          <span class="game-l">PUBG MOBILE / SQUAD</span>
+          <h3>کاپ پاییزی نبرد</h3>
+          <div class="prize">۵۰ میلیون تومان جایزهٔ نقدی</div>
+          <span class="mt">۲۴ مهر ۱۴۰۵ &nbsp;•&nbsp; ۶۴ اسکواد &nbsp;•&nbsp; ورود رایگان</span>
+          <div class="reg">
+            <a class="btn pri" href="#arena"><svg class="i"><use href="#arrow"/></svg>ثبت‌نام اسکواد</a>
+            <div class="cap">۴۸ از ۶۴ اسکواد تکمیل شده<div class="bar"><i></i></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="watch" id="watch">
+      <div class="wrap" style="padding-block:56px">
+        <div class="sh">
+          <div><div class="eyebrow">05 / WATCH &amp; PLAY</div><h2>ببین، یاد بگیر، دوباره بازی کن</h2></div>
+          <a class="more" href="#watch">همهٔ ویدیوها<svg class="i"><use href="#arrow"/></svg></a>
+        </div>
+        <div class="videos">
+          <a class="video" href="#watch"><div class="thumb"><div class="art" style="--h:95"></div><span class="play"><svg class="i"><use href="#play"/></svg></span><span class="dur">08:42</span><span class="vc">هایلایت</span></div><h3>۱۰ لحظه‌ای که باور نمی‌کنی واقعی باشند</h3><div class="vm"><span class="en">Nabard Highlights</span><span>۱۲٫۸ هزار بازدید</span></div></a>
+          <a class="video" href="#watch"><div class="thumb"><div class="art" style="--h:5"></div><span class="play"><svg class="i"><use href="#play"/></svg></span><span class="dur">14:20</span><span class="vc">آموزش</span></div><h3>از سیلور تا رادیانت؛ مسیر یک پلیر واقعی</h3><div class="vm"><span class="en">Nabard Academy</span><span>۸٫۴ هزار بازدید</span></div></a>
+          <a class="video" href="#watch"><div class="thumb"><div class="art" style="--h:40"></div><span class="play"><svg class="i"><use href="#play"/></svg></span><span class="dur">22:16</span><span class="vc">مسابقه</span></div><h3>فینال نفس‌گیر کاپ نبرد؛ تا آخرین گلوله</h3><div class="vm"><span class="en">Nabard Esports</span><span>۲۱ هزار بازدید</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap sec" id="community">
+      <div class="comm">
+        <div class="board">
+          <div class="hd"><b>الان توی کامیونیتی</b><span class="en">COMMUNITY / LIVE</span></div>
+          <div class="thread"><span class="av">G<i></i></span><div class="tx"><b>برای رنک امشب یه اسکواد پایه می‌خوام</b><span>وارزون &nbsp;•&nbsp; ۱۲ پاسخ &nbsp;•&nbsp; ۵ دقیقه پیش</span></div><span class="tag">هم‌تیمی</span></div>
+          <div class="thread"><span class="av">A<i></i></span><div class="tx"><b>کدوم سنسیویتی برای ژیروسکوپ بهتره؟</b><span>پابجی موبایل &nbsp;•&nbsp; ۲۸ پاسخ &nbsp;•&nbsp; ۱۸ دقیقه پیش</span></div><span class="tag">گفت‌وگو</span></div>
+          <div class="thread"><span class="av">N<i></i></span><div class="tx"><b>اولین ایس من با جت؛ نظرتون چیه؟</b><span>ولورانت &nbsp;•&nbsp; ۱۹ پاسخ &nbsp;•&nbsp; ۳۲ دقیقه پیش</span></div><span class="tag">هایلایت</span></div>
+          <a href="#community">همهٔ گفت‌وگوها ←</a>
+        </div>
+        <div class="invite">
+          <div class="eyebrow" style="align-self:stretch">06 / FIND YOUR SQUAD</div>
+          <h2>تک‌نفره دراپ نکن.<br>هم‌تیمی‌هات اینجان.</h2>
+          <p>هم‌تیمی پیدا کن، تجربه‌ات را به اشتراک بگذار و با آدم‌هایی بازی کن که مثل تو عاشق بردن‌اند.</p>
+          <div class="nums">
+            <div><b>۲۴K+</b><span>عضو کامیونیتی</span></div>
+            <div><b>۱٬۲۸۴</b><span>آنلاین همین حالا</span></div>
+            <div><b>۱۸۰+</b><span>اسکواد فعال</span></div>
+          </div>
+          <a class="btn pri" href="#community"><svg class="i"><use href="#users"/></svg>به جمع نبرد بپیوند</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap news">
+      <div class="panel">
+        <div class="msg">
+          <h2>هیچ آپدیتی از رادارت جا نمونه.</h2>
+          <p>مهم‌ترین خبرها، بهترین راهنماها و تورنمنت‌های بعدی؛ مستقیم توی اینباکست.</p>
+        </div>
+        <form id="sub" novalidate>
+          <div class="row">
+            <div class="field"><svg class="i"><use href="#mail"/></svg><input id="email" type="email" placeholder="آدرس ایمیل تو" aria-label="آدرس ایمیل" autocomplete="email"></div>
+            <button class="btn pri" type="submit">خبرم کن</button>
+          </div>
+          <small id="subNote">هفته‌ای یک ایمیل، بدون اسپم. هر وقت خواستی لغو کن.</small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="fcols">
+      <div class="fbrand">
+        <a class="brand" href="#top"><span class="mark"><svg class="i"><use href="#crosshair"/></svg></span><b>نبرد</b><span class="t">خانهٔ گیمرهای فارسی‌زبان</span></a>
+        <p>جایی برای خبر، آموزش، تورنمنت و پیدا کردن هم‌تیمی؛ همه در یک خانه.</p>
+        <div class="social">
+          <a href="#top" aria-label="یوتیوب"><svg class="i"><use href="#youtube"/></svg></a>
+          <a href="#top" aria-label="اینستاگرام"><svg class="i"><use href="#instagram"/></svg></a>
+          <a href="#top" aria-label="تلگرام"><svg class="i"><use href="#send"/></svg></a>
+          <a href="#top" aria-label="دیسکورد"><svg class="i"><use href="#msg"/></svg></a>
+        </div>
+      </div>
+      <div><h4>بازی‌ها</h4><ul class="en" style="align-items:flex-start"><li><a href="#games">Call of Duty</a></li><li><a href="#games">PUBG Mobile</a></li><li><a href="#games">Valorant</a></li><li><a href="#games">EA Sports FC</a></li></ul></div>
+      <div><h4>کشف کن</h4><ul><li><a href="#news">اخبار</a></li><li><a href="#academy">آموزش‌ها</a></li><li><a href="#arena">تورنمنت‌ها</a></li><li><a href="#community">کامیونیتی</a></li></ul></div>
+      <div><h4>همراه نبرد</h4><ul><li><a href="#top">دربارهٔ ما</a></li><li><a href="#top">تماس با ما</a></li><li><a href="#top">همکاری با نبرد</a></li><li><a href="#top">قوانین و حریم خصوصی</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© ۱۴۰۵ نبرد. تمامی حقوق محفوظ است.</span><span class="en">Made for gamers.</span></div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var slides = [
+      { tag: "در کانون نبرد", season: "WARZONE / SEASON 06", title: "اینجا بازی نمی‌کنی؛<br>وارد نبرد می‌شی.", lead: "از اولین دراپ تا آخرین کیل؛ تازه‌ترین خبرها، راهنمای حرفه‌ای‌ها و هم‌تیمی بعدی‌ات را اینجا پیدا کن.", game: "CALL OF DUTY® WARZONE", h: 95 },
+      { tag: "تورنمنت داغ", season: "PUBG MOBILE / FALL CUP", title: "اسکوادت آماده است؟<br>کاپ پاییزی شروع شد.", lead: "۶۴ اسکواد، ۵۰ میلیون تومان جایزه و یک شب که یادت نمی‌رود.", game: "PUBG MOBILE", h: 40 },
+      { tag: "پچ تازه", season: "VALORANT / EPISODE", title: "متا عوض شد؛<br>تو هم عوض شو.", lead: "تغییرات ایجنت‌ها و نقشه‌ها را قبل از رنک بعدی ببین.", game: "VALORANT", h: 5 }
+    ];
+    var art = document.getElementById("heroArt"), bars = document.querySelectorAll(".pager .bar"), cur = 0, timer;
+    function show(i) {
+      cur = i; var s = slides[i];
+      art.style.setProperty("--h", s.h);
+      document.getElementById("heroTag").textContent = s.tag;
+      document.getElementById("heroSeason").textContent = s.season;
+      var ht = document.getElementById("heroTitle");
+      ht.innerHTML = s.title;
+      ht.classList.remove("gl"); void ht.offsetWidth; ht.classList.add("gl");
+      document.getElementById("heroLead").textContent = s.lead;
+      document.getElementById("heroGame").textContent = s.game;
+      document.getElementById("heroNum").textContent = "0" + (i + 1) + " / 03";
+      bars.forEach(function (b, k) { b.classList.toggle("on", k === i); });
+    }
+    function auto() { clearInterval(timer); if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(function () { show((cur + 1) % slides.length); }, 6500); }
+    bars.forEach(function (b, k) { b.addEventListener("click", function () { show(k); auto(); }); });
+    show(0); auto();
+
+    document.querySelectorAll(".chip").forEach(function (c) {
+      c.addEventListener("click", function () {
+        document.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", x === c ? "true" : "false"); });
+        var f = c.dataset.f;
+        document.querySelectorAll("#stories .story").forEach(function (s) { s.hidden = !(f === "all" || s.dataset.c === f); });
+      });
+    });
+
+    var form = document.getElementById("sub"), note = document.getElementById("subNote");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = document.getElementById("email").value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { note.className = ""; note.textContent = "آدرس ایمیل درست نیست. دوباره بررسی کن."; return; }
+      note.className = "ok"; note.textContent = "ثبت شد. اولین خبرنامه به‌زودی برایت می‌رسد.";
+      form.reset();
+    });
+  })();
+</script>
+
+</body>
+</html>
